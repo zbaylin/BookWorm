@@ -1,8 +1,7 @@
-from PySide2 import QtCore, QtGui, QtQuick
+from PySide2 import QtQml
 
-class WizardView(QtQuick.QQuickView):
+
+class WizardView(QtQml.QQmlApplicationEngine):
   def __init__(self, parent=None):
     super(WizardView, self).__init__(parent)
-    self.setTitle("First Time Startup")
-    self.setSource(QtCore.QUrl("wizard.qml"))
-    self.setResizeMode(QtQuick.QQuickView.SizeRootObjectToView)
+    self.load("qml/wizard/wizard.qml")
