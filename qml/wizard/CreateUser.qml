@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Material 2.1
+import "../convenience"
 
 ColumnLayout {
   id: createUserColumn
