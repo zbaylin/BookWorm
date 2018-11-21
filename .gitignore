@@ -1,6 +1,9 @@
 ## Ignore all vscode stuff
 .vscode/*
 
+# Ignore all eBooks and Thumbnails
+assets/ebooks/*
+assets/thumbs/*
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
