@@ -4,7 +4,6 @@ import os
 from views.wizard import WizardView
 from interfaces.wizard import WizardInterface
 from views.main import MainView
-from models import book, student
 import signal
 import config
 

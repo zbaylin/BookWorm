@@ -10,7 +10,7 @@ import "../convenience/NetworkState.js" as NetworkState
 WebContent {
   anchors.fill: parent
   Component.onCompleted: function() {
-    BookViewModel.start_fetch()
+    BooksViewModel.start_fetch()
   }
 
   GridView {
@@ -18,7 +18,7 @@ WebContent {
     property string name: "Book List"
     id: bookGridView
     cacheBuffer: 20
-    model: BookListModel
+    model: BooksListModel
     anchors.fill: parent
     cellWidth: 180; cellHeight: 220
     delegate: ItemDelegate {
@@ -49,7 +49,7 @@ WebContent {
   }
 
   Connections {
-    target: BookViewModel
+    target: BooksViewModel
     onNetwork_state: function(state) {
       switch(state.state) {
         case NetworkState.active:
@@ -57,7 +57,7 @@ WebContent {
           break
         case NetworkState.done:
           loadingIndicator.visible = false
-          BookViewModel.update_list_model(BookListModel)
+          BooksViewModel.update_list_model(BooksListModel)
           bookGridView.visible = true
           break
         case NetworkState.error:

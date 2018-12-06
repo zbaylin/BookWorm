@@ -7,7 +7,7 @@ from views.models.web_content import WebContentViewModel
 import config
 
 
-class BookViewModel(WebContentViewModel):
+class BooksViewModel(WebContentViewModel):
   def __init__(self):
     super().__init__(config.hostname + "/api/books")
     self.books = []

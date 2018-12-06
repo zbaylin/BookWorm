@@ -2,7 +2,7 @@ from PySide2 import QtCore
 from views.models.list_base import BaseListModel
 
 
-class BookListModel(BaseListModel):
+class BooksListModel(BaseListModel):
   ISBN = QtCore.Qt.UserRole + 1
   Title = QtCore.Qt.UserRole + 2
   Author = QtCore.Qt.UserRole + 3
@@ -16,11 +16,11 @@ class BookListModel(BaseListModel):
     row = index.row()
     book = self.list[row]
     switcher = {
-      BookListModel.ISBN: book.isbn,
-      BookListModel.Title: book.title,
-      BookListModel.Author: book.author,
-      BookListModel.Publisher: book.publisher,
-      BookListModel.PublicationDate: book.publication_date
+      BooksListModel.ISBN: book.isbn,
+      BooksListModel.Title: book.title,
+      BooksListModel.Author: book.author,
+      BooksListModel.Publisher: book.publisher,
+      BooksListModel.PublicationDate: book.publication_date
     }
     return switcher.get(role)
 
@@ -29,9 +29,9 @@ class BookListModel(BaseListModel):
 
   def roleNames(self):
     return {
-      BookListModel.ISBN: b"isbn",
-      BookListModel.Title: b"title",
-      BookListModel.Author: b"author",
-      BookListModel.Publisher: b"publisher",
-      BookListModel.PublicationDate: b"publication_date"
+      BooksListModel.ISBN: b"isbn",
+      BooksListModel.Title: b"title",
+      BooksListModel.Author: b"author",
+      BooksListModel.Publisher: b"publisher",
+      BooksListModel.PublicationDate: b"publication_date"
     }
