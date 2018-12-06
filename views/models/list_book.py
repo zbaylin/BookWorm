@@ -1,8 +1,8 @@
 from PySide2 import QtCore
-from models.book import Book
+from views.models.list_base import BaseListModel
 
 
-class BookListModel(QtCore.QAbstractListModel):
+class BookListModel(BaseListModel):
   ISBN = QtCore.Qt.UserRole + 1
   Title = QtCore.Qt.UserRole + 2
   Author = QtCore.Qt.UserRole + 3
@@ -11,11 +11,10 @@ class BookListModel(QtCore.QAbstractListModel):
 
   def __init__(self, parent=None):
     super().__init__(parent)
-    self.books = Book.select()
 
   def data(self, index, role=QtCore.Qt.DisplayRole):
     row = index.row()
-    book = self.books[row]
+    book = self.list[row]
     switcher = {
       BookListModel.ISBN: book.isbn,
       BookListModel.Title: book.title,
@@ -26,7 +25,7 @@ class BookListModel(QtCore.QAbstractListModel):
     return switcher.get(role)
 
   def rowCount(self, parent=QtCore.QModelIndex()):
-    return len(self.books)
+    return len(self.list)
 
   def roleNames(self):
     return {

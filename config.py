@@ -2,6 +2,7 @@ import yaml
 import os
 
 user = None
+hostname = "http://localhost:3000"
 
 
 def toMap():

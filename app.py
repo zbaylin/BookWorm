@@ -4,7 +4,6 @@ import os
 from views.wizard import WizardView
 from interfaces.wizard import WizardInterface
 from views.main import MainView
-from models.main import db
 from models import book, student
 import signal
 import config
@@ -15,7 +14,6 @@ if __name__ == "__main__":
 
   # Enable material design in the app
   os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
-  db.connect()
 
   if config.exists():
     config.load()
@@ -26,8 +24,6 @@ if __name__ == "__main__":
     nameProp.write(config.user["firstName"] + " " + config.user["lastName"])
     schoolProp.write(config.user["school"])
   else:
-    # Create the tables in the database
-    db.create_tables([book.Book, student.Student])
     window = WizardView()
     context = window.rootContext()
     interface = WizardInterface()

@@ -78,52 +78,76 @@ ApplicationWindow {
       }
     }
 
+    // Adds a title to the menubar
     Text {
+      // Sets the text color to white
       color: "white"
+
+      // Centers the title in the menubar
       anchors.verticalCenter: parent.verticalCenter
       anchors.horizontalCenter: parent.horizontalCenter
 
+      // Sets the title to the name of the user and the name of their school
       text: name + "'s Library: " + school
+      // Sets the font size to 14pt
       font.pointSize: 14.0
     }
   }
 
+  // A hamburger menu/sidemenu that serves as the main navigational tool for the app 
   Drawer {
     id: drawer
+    // Uses the global property to determine whether or not the menu is open
     visible: menuOpen
     modal: menuOpen
+
+    /*
+      Sets the drawer to be interactive. This means the user can click out
+      of it and it will close
+    */
     interactive: true
+
+    // Sets the menuOpen property to false when the user closes the menu
     onClosed: function() {
       mainWindow.menuOpen = false
     }
 
+    // Sets the size of the menu
     width: mainWindow.width / 4
     height: mainWindow.height
 
+    // A list to hold all the elements of the menu
     ListView {
       id: drawerList
       anchors.fill: parent
 
+      // We want it to overlay the header
       headerPositioning: ListView.OverlayHeader
+      // Sets the header to a rectangle
       header: Rectangle {
         id: drawerHeader
+        // Sets the width to span the whole sidemenu
         width: parent.width
+        // Sets the height to 200
         height: 200
-        z: 2
+        // Moves it up on the z-axis so that it covers the other items on scroll
+        z: 2 
 
-
+        // Loads in a preset image as a background to the header
         Image {
           id: bookcaseHeaderImage
           anchors.fill: parent
           source: "../../assets/img/bookcase.jpg"
         }
 
+        // Loads in the logo to the header
         FullLogo {
           id: headerLogo
           anchors.centerIn: parent
           source: "../../assets/img/full-logo-white.svg"
         }
 
+        // Adds a drop shadow to the logo
         DropShadow {
           anchors.fill: headerLogo
           horizontalOffset: 3
@@ -133,7 +157,8 @@ ApplicationWindow {
           color: "darkgrey"
           source: headerLogo
         }
-
+        
+        // Adds a separator between the menu items and the header
         MenuSeparator {
           parent: drawerHeader
           width: parent.width
@@ -141,21 +166,30 @@ ApplicationWindow {
           visible: !drawerList.atYBeginning
         }
       }
-      
+
+      // Creates a list of modelElements, which are different views      
       readonly property var modelElements: [
         {
           name: "Book List",
           viewID: bookList
         }
       ]
+      /*
+        Creates an empty list model. We need to do this because
+        QML won't allow compile time creation of list models
+        with dynamic content (the viewIDs) 
+      */
       model: ListModel {}
 
+      // When the component has loaded...
       Component.onCompleted: {
+        // ...append each modelElement to the list model
         modelElements.forEach(function(element) {
           model.append(element)
         })
       }
 
+      // Renders each modelElement
       delegate: ItemDelegate {
         Label {
           anchors.horizontalCenterOffset: 20
@@ -163,6 +197,7 @@ ApplicationWindow {
           text: "    " + name
         }
         width: parent.width
+        // When the list item is clicked, push the view to the StackView
         onClicked: function () {
           mainStack.push(viewID)
           mainWindow.menuOpen = false
@@ -171,11 +206,15 @@ ApplicationWindow {
     }
   }
 
+  /*
+    The main container for all the views. 
+  */
   StackView { 
     id: mainStack
     initialItem: bookList
     anchors.fill: parent
 
-    Component { id: bookList; BookList {} }
+    // All the possible views to be switched to
+    BookList {id: bookList; anchors.fill: parent}
   }
 }
