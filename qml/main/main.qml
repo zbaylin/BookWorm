@@ -1,6 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.11
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
@@ -10,6 +10,7 @@ import "../convenience/MaterialDesign.js" as MD
 ApplicationWindow {
   property string name : ""
   property string school : ""
+  property string hostname : ""
   id: mainWindow
   visible: true
 
@@ -215,6 +216,6 @@ ApplicationWindow {
     anchors.fill: parent
 
     // All the possible views to be switched to
-    BookList {id: bookList; anchors.fill: parent}
+    Component { id: bookList; BookList {}}
   }
 }

@@ -20,8 +20,10 @@ if __name__ == "__main__":
     root = window.rootObjects()[0]
     nameProp = QtQml.QQmlProperty(root, "name")
     schoolProp = QtQml.QQmlProperty(root, "school")
+    hostProp = QtQml.QQmlProperty(root, "hostname")
     nameProp.write(config.user["firstName"] + " " + config.user["lastName"])
     schoolProp.write(config.user["school"])
+    hostProp.write(config.hostname)
   else:
     window = WizardView()
     context = window.rootContext()

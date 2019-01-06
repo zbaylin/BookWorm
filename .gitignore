@@ -1,5 +1,8 @@
-## Ignore all vscode stuff
+# Ignore all vscode stuff
 .vscode/*
+
+# Ignore all compiled Javascript stuff
+*.jsc
 
 # Ignore all eBooks and Thumbnails
 assets/ebooks/*

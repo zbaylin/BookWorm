@@ -8,9 +8,13 @@ import "../convenience"
 import "../convenience/NetworkState.js" as NetworkState
 
 WebContent {
-  anchors.fill: parent
   Component.onCompleted: function() {
     BooksViewModel.start_fetch()
+  }
+
+  Image {
+    anchors.fill: parent
+    source: "../../assets/img/book_bg.jpg"
   }
 
   GridView {
@@ -20,10 +24,15 @@ WebContent {
     cacheBuffer: 20
     model: BooksListModel
     anchors.fill: parent
-    cellWidth: 180; cellHeight: 220
+    cellWidth: 220; cellHeight: 220
     delegate: ItemDelegate {
       width: bookGridView.cellWidth
       height: bookGridView.cellHeight
+      onPressed: function() {
+        var comp = Qt.createComponent("BookPage.qml")
+        var obj = comp.createObject(mainStack, {"isbn": isbn})
+        mainStack.push(obj)
+      }
       Column {
         anchors.fill: parent
         anchors.topMargin: 20
@@ -33,7 +42,7 @@ WebContent {
           fillMode: Image.PreserveAspectFit
           width: parent.width / 1.5
           height: parent.height / 1.5
-          source: "http://localhost:3000/api/book/" + isbn + "/cover_image"
+          source: hostname + "/api/book/" + isbn + "/cover_image"
         }
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
