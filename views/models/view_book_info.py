@@ -11,6 +11,10 @@ class BookInfoViewModel(WebContentViewModel):
   def __init__(self, isbn=""):
     super().__init__(config.hostname + "/api/book/" + isbn + "/info")
   
+  @QtCore.Slot(str)
+  def init_for_book(self, isbn):
+    self.url = config.hostname + "/api/book/" + isbn + "/info"
+  
   @QtCore.Slot()
   def start_fetch(self):
     self.thread = threading.Thread(target=self._fetch_data)
@@ -22,11 +26,11 @@ class BookInfoViewModel(WebContentViewModel):
       r = requests.get(self.url)
       r.raise_for_status()
       js = r.json()
-      self.books = [Book.from_json(j) for j in js["books"]]
+      self.book = Book.from_json(js["book"])
       self.network_state.emit(
         {
           "state": NetworkState.done, 
-          "data": self.books
+          "data": self.book.__dict__
         }
       )
     except Exception as e:

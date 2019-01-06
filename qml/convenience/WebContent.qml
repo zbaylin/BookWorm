@@ -10,7 +10,7 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
 
-Item {
+Rectangle {
   // Exposes the loading indicator and error message components
   property alias loadingIndicator: loading
   property alias errorMessage: error

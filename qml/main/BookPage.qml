@@ -39,13 +39,14 @@ Item {
       height: parent.height
 
       // A rectangle to make the book cover look pretty...
-      Rectangle {
+      Item {
         // ...which we will call 'imgContainer'
         id: imgContainer
         // Set it's height to 400 (looks good on most screens)...
         height: 400
         // ...and enforce it.
-        Layout.maximumHeight: height
+        Layout.minimumHeight: height
+        Layout.preferredHeight: height
         Layout.preferredWidth: mainStack.width
         // Center it in the screen
         Layout.alignment: Qt.AlignHCenter
@@ -91,7 +92,18 @@ Item {
           radius: 48
         }
       }
-      Rectangle { width: 50; height: 400; color: "red" }
+      Card {
+        width: mainStack.width
+        Layout.alignment: Qt.AlignHCenter
+        Layout.preferredWidth: mainStack.width*.9
+        Layout.minimumHeight: 200
+        Layout.preferredHeight: bookInfo.height
+        BookInfo {
+          id: bookInfo
+          anchors.fill: parent
+          width: parent.width
+        }
+      }
     }
   }
 }
