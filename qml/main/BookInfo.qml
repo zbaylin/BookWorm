@@ -1,38 +1,83 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
+import QtQuick.Controls.Material 2.2
 import "../convenience"
 import "../convenience/NetworkState.js" as NetworkState
 
 WebContent {
+  id: bookInfo
   property var book
-  height: column.height
   Component.onCompleted: function() {
     BookInfoViewModel.init_for_book(isbn)
-    BookInfoViewModel.start_fetch()
+    BookInfoViewModel.start_fetch()    
   }
-  Column {
+  property alias columnHeight: column.implicitHeight
+  ColumnLayout {
     id: column
     visible: false
-    width: parent.width
     Text {
       text: book ? book.title : ""
       font.pointSize: 24
-      anchors.horizontalCenter: parent.horizontalCenter
+      Layout.alignment: Qt.AlignHCenter
     }
     Text {
       text: "by " + (book ? book.author : "")
       font.pointSize: 16
-      anchors.horizontalCenter: parent.horizontalCenter
+      Layout.alignment: Qt.AlignHCenter
+    }
+    Row {
+      Layout.alignment: Qt.AlignHCenter
+      Repeater {
+        model: book ? Math.round(book.rating) : 0
+        Text {
+          text: "★"
+          color: "goldenrod"
+          font.pointSize: 40
+        }
+      }
+      Repeater {
+        model: book ? 5 - Math.round(book.rating) : 0
+        Text {
+          text: "☆"
+          color: "goldenrod"
+          font.pointSize: 40
+        }
+      }
+    }
+    Text {
+      Layout.alignment: Qt.AlignHCenter
+      text: book ? "Rating: " + book.rating : ""
+    }
+    Label {
+      text: "Publisher:"
+      font.bold: true
+    }
+    Text {
+      text: book ? "\t" + book.publisher : ""
+    }
+    Label {
+      text: "Publication Date:"
+      font.bold: true
+    }
+    Text {
+      text: book ? "\t" + book.publication_date.substring(0, book.publication_date.length - 10) : ""
+    }
+    Label {
+      text: "ISBN:"
+      font.bold: true
+    }
+    Text {
+      text: book ? "\t" + book.isbn : ""
     }
     Label {
       text: "Summary:"
       font.bold: true
     }
     Text {
-      width: parent.width
-      wrapMode: Text.WordWrap
-      text: book ? book.summary : ""
+      Layout.preferredWidth: bookInfo.width
+      wrapMode: Text.Wrap
+      text: book ? "\t" + book.summary : ""
     }
   }
   Connections {

@@ -95,15 +95,15 @@ Item {
       Card {
         width: mainStack.width
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredWidth: mainStack.width*.9
-        Layout.minimumHeight: 200
-        Layout.preferredHeight: bookInfo.height
+        Layout.preferredWidth: mainStack.width - 40
+        Layout.preferredHeight: bookInfo.columnHeight + 20
         BookInfo {
           id: bookInfo
           anchors.fill: parent
           width: parent.width
         }
       }
+      Item { height: 20; }
     }
   }
 }

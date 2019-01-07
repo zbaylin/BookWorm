@@ -1,5 +1,4 @@
 import json
-from PySide2 import QtCore
 
 
 class Book():
@@ -10,7 +9,8 @@ class Book():
     author,
     publisher,
     summary,
-    publication_date
+    publication_date,
+    rating
   ):
     self.isbn = isbn,
     self.title = title,
@@ -18,6 +18,7 @@ class Book():
     self.publisher = publisher,
     self.summary = summary,
     self.publication_date = publication_date
+    self.rating = rating
   
   @classmethod
   def from_json(cls, json_map):
@@ -30,4 +31,5 @@ class Book():
       json_map["publisher"],
       json_map["summary"],
       json_map["publication_date"],
+      json_map["rating"]
     )
