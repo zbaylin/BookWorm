@@ -79,6 +79,15 @@ WebContent {
       wrapMode: Text.Wrap
       text: book ? "\t" + book.summary : ""
     }
+    Button {
+      text: "VIEW IN GOOGLE BOOKS"
+      Material.background: Material.Blue
+      Material.foreground: "white"
+      Layout.alignment: Qt.AlignRight
+      onClicked: function() {
+        Qt.openUrlExternally("https://books.google.com/books?vid=" + isbn)
+      }
+    }
   }
   Connections {
     target: BookInfoViewModel
