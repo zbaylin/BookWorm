@@ -21,8 +21,8 @@ ApplicationWindow {
 
   property bool menuOpen: false
 
-  // Set the default window size to 1280x720
-  width: 1280
+  // Set the default window size to 1120x720
+  width: 1120
   height: 720
 
   // Set the window title to the user's name and their school

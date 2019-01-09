@@ -47,10 +47,16 @@ WebContent {
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
           text: title
+          width: parent.width / 1.5
+          horizontalAlignment: Text.AlignHCenter
+          elide: Text.ElideRight
           font.bold: true
         }
         Text {
           anchors.horizontalCenter: parent.horizontalCenter
+          width: parent.width
+          horizontalAlignment: Text.AlignHCenter
+          elide: Text.ElideRight
           text: author
         }
       }
