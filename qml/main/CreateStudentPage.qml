@@ -170,8 +170,10 @@ Item {
       }
     }
     
+    // Make a webcontent page
     WebContent {
       id: successPage
+      // And show a success message if/when it's done
       Text {
         anchors.centerIn: parent
         id: successText
@@ -181,19 +183,26 @@ Item {
     }
   }
 
+  // Bind to...
   Connections {
+    // ...the CreateStudentViewModel
     target: CreateStudentViewModel
+    // When it triggers a network signal...
     onNetwork_state: function (state) {
+      // ...act depending on the state
       switch (state.state) {
         case NetworkState.active:
+          // If it's loading, show it's loading.
           successPage.loadingIndicator.visible = true
           break
         case NetworkState.error:
+          // If there is an error, hide the loading indicator, and show the error message
           successPage.loadingIndicator.visible = false
           successPage.errorMessage.text = "There has been an error creating this user. Please note you can only make one account."
           successPage.errorMessage.visible = true
           break
         case NetworkState.done:
+          // If it's successful, show the success message
           successPage.loadingIndicator.visible = false
           successText.visible = true
       }
