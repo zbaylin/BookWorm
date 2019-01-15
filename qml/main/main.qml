@@ -173,7 +173,11 @@ ApplicationWindow {
         {
           name: "Book List",
           viewID: bookList
-        }
+        },
+        {
+          name: "Create Student (Sign Up)",
+          viewID: createStudent
+        },
       ]
       /*
         Creates an empty list model. We need to do this because
@@ -217,5 +221,6 @@ ApplicationWindow {
 
     // All the possible views to be switched to
     Component { id: bookList; BookList {}}
+    Component { id: createStudent; CreateStudentPage {} }
   }
 }
