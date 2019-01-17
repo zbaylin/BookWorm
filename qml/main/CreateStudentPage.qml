@@ -97,6 +97,7 @@ Item {
           placeholderText: "ex. john@smith.com"
           Layout.fillWidth: true
           function validate () {
+            // Using a RegEx, validate if the email is valid
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var valid = re.test(text)
             emailLabel.Material.foreground = ((valid) ? Material.Black : Material.Red)
