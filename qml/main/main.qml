@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.11
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls.Material 2.2
+import QtQuick.Window 2.11
 import QtGraphicalEffects 1.0
 import "../convenience"
 import "../convenience/MaterialDesign.js" as MD
@@ -13,8 +14,6 @@ ApplicationWindow {
   property string hostname : ""
   id: mainWindow
   visible: true
-
-
   // Set the color scheme of the application (Light and Blue)
   Material.theme: Material.Light
   Material.accent: Material.Blue
@@ -36,6 +35,9 @@ ApplicationWindow {
     id: iconFont
     source: "../../assets/fonts/MaterialIcons-Regular.ttf"
   }
+
+  // A window to be shown when the book is checked out
+  CheckOutBookWindow { id: checkOutBookWindow }
 
   // Sets the header to be a tool bar
   header: ToolBar {

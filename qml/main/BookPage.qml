@@ -2,6 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.1
+import QtQuick.Window 2.11
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
 import "../convenience"

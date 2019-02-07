@@ -79,13 +79,25 @@ WebContent {
       wrapMode: Text.Wrap
       text: book ? "\t" + book.summary : ""
     }
-    Button {
-      text: "VIEW IN GOOGLE BOOKS"
-      Material.background: Material.Blue
-      Material.foreground: "white"
+    Row {
+      spacing: 16
       Layout.alignment: Qt.AlignRight
-      onClicked: function() {
-        Qt.openUrlExternally("https://books.google.com/books?vid=" + isbn)
+      Button {
+        text: "VIEW IN GOOGLE BOOKS"
+        Material.background: "white"
+        Material.foreground: Material.Blue
+        onClicked: function() {
+          Qt.openUrlExternally("https://books.google.com/books?vid=" + isbn)
+        }
+      }
+      Button {
+        text: "CHECK OUT EBOOK"
+        Material.background: Material.Blue
+        Material.foreground: "white"
+        onClicked: function() {
+          checkOutBookWindow.isbn = book.isbn
+          checkOutBookWindow.visible = true
+        }
       }
     }
   }
