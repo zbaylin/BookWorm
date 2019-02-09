@@ -39,6 +39,9 @@ ApplicationWindow {
   // A window to be shown when the book is checked out
   CheckOutBookWindow { id: checkOutBookWindow }
 
+  // A window to be shown when a user is edited
+  EditStudentWindow { id: editStudentWindow }
+
   // Sets the header to be a tool bar
   header: ToolBar {
     id: toolBar
@@ -180,6 +183,10 @@ ApplicationWindow {
           name: "Create Student (Sign Up)",
           viewID: createStudent
         },
+        {
+          name: "Student List",
+          viewID: studentList
+        },
       ]
       /*
         Creates an empty list model. We need to do this because
@@ -222,7 +229,8 @@ ApplicationWindow {
     anchors.fill: parent
 
     // All the possible views to be switched to
-    Component { id: bookList; BookList {}}
+    Component { id: bookList; BookList {} }
     Component { id: createStudent; CreateStudentPage {} }
+    Component { id: studentList; StudentList {} }
   }
 }
