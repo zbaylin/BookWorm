@@ -4,13 +4,20 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls.Material 2.2
 import QtGraphicalEffects 1.0
+import Qt.labs.calendar 1.0
 import "../convenience"
 import "../convenience/NetworkState.js" as NetworkState
+import "../convenience/MaterialDesign.js" as MD
 
 Item {
   id: reportPage
   width: mainStack.width
   height: mainStack.height
+  property bool calendarShown: false
+  property var dateEnd: new Date()
+  property var months: [ "January", "February", "March", "April", "May", "June", 
+              "July", "August", "September", "October", "November", "December" ]
+        
   ScrollView {
     height: parent.height
     width: parent.width
@@ -26,17 +33,67 @@ Item {
       spacing: 12
       anchors.horizontalCenter: parent.horizontalCenter
 
-      Text {
-        id: weekLabel
-        Layout.topMargin: 10
+      Row {
         Layout.alignment: Qt.AlignHCenter
-        font.pointSize: 20.0
-        text: "Week of "
-        Component.onCompleted: function() {
-          var date_1 = new Date()
-          var date_0 = new Date()
-          date_0.setDate(date_1.getDate() - 7)
-          weekLabel.text = "Week of " + date_0.toLocaleDateString("en-US") + " to " + date_1.toLocaleDateString("en-US")
+        Layout.topMargin: 10
+        spacing: 6
+        Text {
+          id: weekLabel
+          font.pointSize: 20.0
+          text: "Week of "
+          Component.onCompleted: function() {
+            var date0 = new Date()
+            date0.setDate(dateEnd.getDate() - 7)
+            weekLabel.text = "Week of " + date0.toLocaleDateString("en-US") + " to " + dateEnd.toLocaleDateString("en-US")
+          }
+        }
+        ItemDelegate {
+          Text {
+            anchors.centerIn: parent
+            font.pointSize: 16
+            font.family: iconFont.name
+            text: calendarShown ? MD.icons.expand_less : MD.icons.expand_more
+          }
+          onClicked: function() {
+            calendarShown = !calendarShown
+          }
+        }
+      }
+      
+      ColumnLayout {
+        visible: calendarShown
+        Layout.maximumWidth: mainStack.width / 3
+        Layout.minimumWidth: mainStack.width / 4
+        Layout.alignment: Qt.AlignHCenter
+
+        Text {
+          Layout.alignment: Qt.AlignHCenter
+          text: months[dateEnd.getMonth()]
+        }
+
+        DayOfWeekRow {
+          locale: grid.locale
+          Layout.fillWidth: true
+        }
+
+        MonthGrid {
+          id: grid
+          month: dateEnd.getMonth()
+          Layout.fillWidth: true
+          locale: Qt.locale("en_US")
+          delegate: ItemDelegate {
+            height: 16;
+            Text {
+              anchors.centerIn: parent
+              text: model.day
+              color: (model.day == dateEnd.getDate() && model.date.getMonth() == date.getMonth()) ? "orange" : "black"
+            }
+            onClicked: function() {
+              var newDate = new Date()
+              newDate.setDate(model.date.getDate() + 1)
+              dateEnd = newDate
+            }
+          }
         }
       }
 
