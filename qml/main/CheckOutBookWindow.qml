@@ -15,11 +15,13 @@ Window {
 
   property alias isbn: checkOutBookPage.isbn
 
+  // We show the book page in the window
   CheckOutBookPage {
     anchors.fill: parent
     id: checkOutBookPage
   }
 
+  // When the window closes, reset the page
   onClosing: function() {
     checkOutBookPage.reset()
   }
