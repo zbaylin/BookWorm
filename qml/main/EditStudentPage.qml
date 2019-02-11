@@ -122,6 +122,7 @@ Item {
           ]
           // If all of them are valid, we can proceed by...
           var valid = validations.every(function(x) { return x })
+          // ...initiating the view model for the student and pushing it to the server
           if (valid) {
             createErrorLabel.visible = false
             EditStudentViewModel.init_for_student(
@@ -131,8 +132,10 @@ Item {
               emailField.text
             )
             EditStudentViewModel.start_fetch()
+            // Moves the swipe to the next page
             swipe.currentIndex += 1
           } else {
+            // If there is an error, say so!
             createErrorLabel.visible = true
           }
         }
@@ -140,6 +143,7 @@ Item {
 
     }
 
+    // A page of the swipe view that contains all the success info
     WebContent {
       id: resultPage
       ColumnLayout {
@@ -159,6 +163,7 @@ Item {
           text: "Successfully edited student."
         }
 
+        // A button that closes the window
         Button {
           text: "Done"
           Layout.alignment: Qt.AlignHCenter
@@ -180,6 +185,7 @@ Item {
           resultPage.loadingIndicator.visible = true
           break
         case NetworkState.error:
+          // If there is an error, show the error.
           resultPage.loadingIndicator.visible = false
           resultPage.errorMessage.text = "There has been an error editing this student."
           resultPage.errorMessage.visible = true
