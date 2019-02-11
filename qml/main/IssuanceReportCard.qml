@@ -11,10 +11,17 @@ import "../convenience/NetworkState.js" as NetworkState
 
 Card {
   Component.onCompleted: function() {
+    update()
+  }
+
+  function update() {
+    IssuanceReportViewModel.set_date(date.toISOString())
     IssuanceReportViewModel.start_fetch()
   }
 
   id: issuanceReportCard
+  property var date
+  
   ColumnLayout {
     id: mainColumn
     width: parent.width

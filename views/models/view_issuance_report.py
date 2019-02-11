@@ -10,6 +10,11 @@ class IssuanceReportViewModel(WebContentViewModel):
   def __init__(self):
     # Initialize the parent class with the stat URI
     super().__init__(config.hostname + "/api/issuances/weekly_stats")
+    self.date = None
+
+  @QtCore.Slot(str)
+  def set_date(self, date_str):
+    self.date = date_str
 
   @QtCore.Slot()
   def start_fetch(self):
@@ -18,8 +23,10 @@ class IssuanceReportViewModel(WebContentViewModel):
   
   def _fetch_data(self):
     try:
+      if self.date is None:
+        raise TypeError
       self.network_state.emit({'state': NetworkState.active})
-      r = requests.get(self.url)
+      r = requests.get(self.url, params={"date": self.date})
       r.raise_for_status()
       js = r.json()
       if js["success"]:

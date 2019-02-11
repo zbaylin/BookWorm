@@ -40,12 +40,7 @@ Item {
         Text {
           id: weekLabel
           font.pointSize: 20.0
-          text: "Week of "
-          Component.onCompleted: function() {
-            var date0 = new Date()
-            date0.setDate(dateEnd.getDate() - 7)
-            weekLabel.text = "Week of " + date0.toLocaleDateString("en-US") + " to " + dateEnd.toLocaleDateString("en-US")
-          }
+          text: "Week ending " + dateEnd.toLocaleDateString("en-US")
         }
         ItemDelegate {
           Text {
@@ -86,21 +81,33 @@ Item {
             Text {
               anchors.centerIn: parent
               text: model.day
-              color: (model.day == dateEnd.getDate() && model.date.getMonth() == date.getMonth()) ? "orange" : "black"
+              color: if (model.day == dateEnd.getDate() && model.date.getMonth() == date.getMonth()) {
+                "orange" 
+              } else if (model.day <= new Date().getDate()) {
+                "black"
+              } else {
+                "grey"
+              }
             }
             onClicked: function() {
               var newDate = new Date()
-              newDate.setDate(model.date.getDate() + 1)
-              dateEnd = newDate
+
+              if (model.day <= newDate.getDate()) {
+                newDate.setDate(model.date.getDate() + 1)
+                dateEnd = newDate
+                issuanceReportCard.update()
+              }
             }
           }
         }
       }
 
       IssuanceReportCard {
+        id: issuanceReportCard
         Layout.alignment: Qt.AlignHCenter
         Layout.preferredWidth: reportPage.width - 12
         Layout.leftMargin: 6
+        date: dateEnd
       }
     }
   }
