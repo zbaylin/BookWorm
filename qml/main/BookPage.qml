@@ -96,7 +96,7 @@ Item {
       Card {
         width: mainStack.width
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredWidth: mainStack.width - 40
+        Layout.preferredWidth: mainStack.width - 12
         Layout.preferredHeight: bookInfo.columnHeight + 20
         BookInfo {
           id: bookInfo

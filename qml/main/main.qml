@@ -20,8 +20,8 @@ ApplicationWindow {
 
   property bool menuOpen: false
 
-  // Set the default window size to 1120x720
-  width: 1120
+  // Set the default window size to 1170x720
+  width: 1100
   height: 720
 
   // Set the window title to the user's name and their school
@@ -94,7 +94,7 @@ ApplicationWindow {
       anchors.horizontalCenter: parent.horizontalCenter
 
       // Sets the title to the name of the user and the name of their school
-      text: name + "'s Library: " + school
+      text: name + "'s Library - " + school
       // Sets the font size to 14pt
       font.pointSize: 14.0
     }
@@ -180,13 +180,17 @@ ApplicationWindow {
           viewID: bookList
         },
         {
+          name: "Student List",
+          viewID: studentList
+        },
+        {
           name: "Create Student (Sign Up)",
           viewID: createStudent
         },
         {
-          name: "Student List",
-          viewID: studentList
-        },
+          name: "Generate Weekly Report",
+          viewID: reportPage
+        }
       ]
       /*
         Creates an empty list model. We need to do this because
@@ -232,5 +236,6 @@ ApplicationWindow {
     Component { id: bookList; BookList {} }
     Component { id: createStudent; CreateStudentPage {} }
     Component { id: studentList; StudentList {} }
+    Component { id: reportPage; ReportPage {} }
   }
 }

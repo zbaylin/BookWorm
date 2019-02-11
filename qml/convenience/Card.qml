@@ -3,5 +3,5 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 
 Pane {
-  Material.elevation: 6
+  Material.elevation: 3
 }

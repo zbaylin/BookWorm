@@ -12,9 +12,9 @@ WebContent {
     BooksViewModel.start_fetch()
   }
 
-  Image {
+  Rectangle {
+    color: Material.color(Material.Blue, Material.Shade100)
     anchors.fill: parent
-    source: "../../assets/img/book_bg.jpg"
   }
 
   GridView {
@@ -24,40 +24,51 @@ WebContent {
     cacheBuffer: 20
     model: BooksListModel
     anchors.fill: parent
-    cellWidth: 220; cellHeight: 220
-    delegate: ItemDelegate {
-      width: bookGridView.cellWidth
-      height: bookGridView.cellHeight
-      onPressed: function() {
-        var comp = Qt.createComponent("BookPage.qml")
-        var obj = comp.createObject(mainStack, {"isbn": isbn})
-        mainStack.push(obj)
-      }
-      Column {
+    anchors.margins: 6
+    cellWidth: 360; cellHeight: 230
+    delegate: Card {
+      width: bookGridView.cellWidth - 12
+      height: bookGridView.cellHeight - 12
+      ItemDelegate {
+        id: itemDelegate
         anchors.fill: parent
-        anchors.topMargin: 20
-        visible: true
-        Image {
-          anchors.horizontalCenter: parent.horizontalCenter
-          fillMode: Image.PreserveAspectFit
-          width: parent.width / 1.5
-          height: parent.height / 1.5
-          source: hostname + "/api/book/" + isbn + "/cover_image"
+        Row {
+          id: row
+          anchors.fill: parent
+          Image {
+            id: bookCover
+            fillMode: Image.PreserveAspectFit
+            Layout.preferredHeight: itemDelegate.height
+            height: parent.height
+            source: hostname + "/api/book/" + isbn + "/cover_image"
+          }
+
+          Column {
+            width: row.width - bookCover.width
+            anchors.verticalCenter: parent.verticalCenter
+            Text {
+              text: title
+              anchors.horizontalCenter: parent.horizontalCenter
+              horizontalAlignment: Text.AlignHCenter
+              width: parent.width
+              wrapMode: Text.Wrap
+              maximumLineCount: 2
+              font.bold: true
+            }
+            Text {
+              Layout.alignment: Qt.AlignHCenter
+              width: parent.width
+              anchors.horizontalCenter: parent.horizontalCenter
+              horizontalAlignment: Text.AlignHCenter
+              wrapMode: Text.Wrap
+              text: author
+            }
+          }
         }
-        Text {
-          anchors.horizontalCenter: parent.horizontalCenter
-          text: title
-          width: parent.width / 1.5
-          horizontalAlignment: Text.AlignHCenter
-          elide: Text.ElideRight
-          font.bold: true
-        }
-        Text {
-          anchors.horizontalCenter: parent.horizontalCenter
-          width: parent.width
-          horizontalAlignment: Text.AlignHCenter
-          elide: Text.ElideRight
-          text: author
+        onPressed: function() {
+          var comp = Qt.createComponent("BookPage.qml")
+          var obj = comp.createObject(mainStack, {"isbn": isbn})
+          mainStack.push(obj)
         }
       }
     }

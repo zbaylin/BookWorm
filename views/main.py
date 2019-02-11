@@ -7,26 +7,32 @@ from views.models.view_check_out import CheckOutViewModel
 from views.models.list_students import StudentsListModel
 from views.models.view_students import StudentsViewModel
 from views.models.view_edit_student import EditStudentViewModel
+from views.models.view_issuance_report import IssuanceReportViewModel
 
 
-class MainView(QtQml.QQmlApplicationEngine):
-  def __init__(self, parent=None):
-    super(MainView, self).__init__(parent)
-    self.book_list_model = BooksListModel()
-    self.book_view_model = BooksViewModel()
-    self.book_info_view_model = BookInfoViewModel()
-    self.check_out_view_model = CheckOutViewModel()
-    self.create_student_view_model = CreateStudentViewModel()
-    self.students_view_model = StudentsViewModel()
-    self.students_list_model = StudentsListModel()
-    self.edit_student_view_model = EditStudentViewModel()
-    context = self.rootContext()
-    context.setContextProperty('BooksListModel', self.book_list_model)
-    context.setContextProperty('BooksViewModel', self.book_view_model)
-    context.setContextProperty('BookInfoViewModel', self.book_info_view_model)
-    context.setContextProperty('CreateStudentViewModel', self.create_student_view_model)
-    context.setContextProperty('CheckOutViewModel', self.check_out_view_model)
-    context.setContextProperty('StudentsViewModel', self.students_view_model)
-    context.setContextProperty('StudentsListModel', self.students_list_model)
-    context.setContextProperty('EditStudentViewModel', self.edit_student_view_model)
-    self.load("qml/main/main.qml")
+def prep_engine(engine: QtQml.QQmlApplicationEngine):
+  # We create all the list/view models needed for the main application
+  # All of them can be found at their umport locations above
+  engine.book_list_model = BooksListModel()
+  engine.book_view_model = BooksViewModel()
+  engine.book_info_view_model = BookInfoViewModel()
+  engine.check_out_view_model = CheckOutViewModel()
+  engine.create_student_view_model = CreateStudentViewModel()
+  engine.students_view_model = StudentsViewModel()
+  engine.students_list_model = StudentsListModel()
+  engine.edit_student_view_model = EditStudentViewModel()
+  engine.issuance_report_view_model = IssuanceReportViewModel()
+  # We acquire the root context from the engine...
+  context = engine.rootContext()
+  # ...and load in all of the models so they are accessible from QML
+  context.setContextProperty('BooksListModel', engine.book_list_model)
+  context.setContextProperty('BooksViewModel', engine.book_view_model)
+  context.setContextProperty('BookInfoViewModel', engine.book_info_view_model)
+  context.setContextProperty('CreateStudentViewModel', engine.create_student_view_model)
+  context.setContextProperty('CheckOutViewModel', engine.check_out_view_model)
+  context.setContextProperty('StudentsViewModel', engine.students_view_model)
+  context.setContextProperty('StudentsListModel', engine.students_list_model)
+  context.setContextProperty('EditStudentViewModel', engine.edit_student_view_model)
+  context.setContextProperty('IssuanceReportViewModel', engine.issuance_report_view_model)
+  # We load the main QML file from the disk into the engine
+  engine.load("qml/main/main.qml")

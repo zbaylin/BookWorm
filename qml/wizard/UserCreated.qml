@@ -32,5 +32,8 @@ ColumnLayout {
     text: "I'm ready"
     Layout.alignment: Qt.AlignCenter
     highlighted: true
+    onClicked: function() {
+      wizardInterface.onDone()
+    }
   }
 }
