@@ -93,6 +93,7 @@ Item {
           radius: 48
         }
       }
+      // Creates a card with the book info component
       Card {
         width: mainStack.width
         Layout.alignment: Qt.AlignHCenter
