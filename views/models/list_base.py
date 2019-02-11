@@ -1,6 +1,8 @@
 from PySide2 import QtCore
 
 
+# A base list model class that all other models will inherit
+# It inherits the QAbstractListModel class from QtCore
 class BaseListModel(QtCore.QAbstractListModel):
   def __init__(self, parent=None):
     super().__init__(parent)
