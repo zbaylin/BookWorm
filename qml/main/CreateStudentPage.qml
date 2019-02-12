@@ -106,6 +106,21 @@ Item {
         }
 
         Label {
+          id: gradeLabel
+          text: "Grade " 
+        }
+        ValidatableField {
+          placeholderText: "9"
+          id: gradeField
+          Layout.fillWidth: true
+          function validate() {
+            var valid = text !== ""
+            lastNameLabel.Material.foreground = ((valid) ? Material.Black : Material.Red)
+            return valid
+          }
+        }
+
+        Label {
           id: passwordLabel
           text: "Password " 
         }
@@ -144,7 +159,8 @@ Item {
             emailField.validate(),
             passwordField.validate(),
             firstNameField.validate(),
-            lastNameField.validate()
+            lastNameField.validate(),
+            gradeField.validate()
           ]
           // If all of them are valid, we can proceed by...
           var valid = validations.every(function(x) { return x })
@@ -155,7 +171,8 @@ Item {
               emailField.text,
               passwordField.text,
               firstNameField.text,
-              lastNameField.text
+              lastNameField.text,
+              gradeField.text
             )
             // ...fetching from the server...
             CreateStudentViewModel.start_fetch()

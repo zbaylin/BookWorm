@@ -7,7 +7,8 @@ class StudentsListModel(BaseListModel):
   Firstname = QtCore.Qt.UserRole + 2
   Lastname = QtCore.Qt.UserRole + 3
   Email = QtCore.Qt.UserRole + 4
-  NumIssuances = QtCore.Qt.UserRole + 5
+  Grade = QtCore.Qt.UserRole + 5
+  NumIssuances = QtCore.Qt.UserRole + 6
 
   def __init__(self, parent=None):
     super().__init__(parent)
@@ -20,6 +21,7 @@ class StudentsListModel(BaseListModel):
       StudentsListModel.Firstname: student.firstname,
       StudentsListModel.Lastname: student.lastname,
       StudentsListModel.Email: student.email,
+      StudentsListModel.Grade: student.grade,
       StudentsListModel.NumIssuances: student.num_issuances
     }
     return switcher.get(role)
@@ -33,5 +35,6 @@ class StudentsListModel(BaseListModel):
       StudentsListModel.Firstname: b"firstname",
       StudentsListModel.Lastname: b"lastname",
       StudentsListModel.Email: b"email",
+      StudentsListModel.Grade: b"grade",
       StudentsListModel.NumIssuances: b"numIssuances"
     }

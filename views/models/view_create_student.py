@@ -13,13 +13,14 @@ class CreateStudentViewModel(WebContentViewModel):
     # We will set the params once we get the student's info
     self.params = None
   
-  @QtCore.Slot(str, str, str, str)
-  def init_for_student(self, email, password, firstname, lastname):
+  @QtCore.Slot(str, str, str, str, str)
+  def init_for_student(self, email, password, firstname, lastname, grade):
     self.params = {
       "email": email,
       "password": password,
       "firstname": firstname,
-      "lastname": lastname
+      "lastname": lastname,
+      "grade": grade
     }
   
   @QtCore.Slot()

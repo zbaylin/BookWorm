@@ -28,9 +28,8 @@ WebContent {
         anchors.centerIn: parent
         Text {
           Layout.alignment: Qt.AlignHCenter
-          text: lastname + ", " + firstname
+          text: "<b>" + lastname + ", " + firstname + "</b> " + "(" + grade + ")"
           font.pointSize: 14
-          font.bold: true 
         }
         Text {
           Layout.alignment: Qt.AlignHCenter
@@ -57,7 +56,7 @@ WebContent {
             Material.foreground: "white"         
             text: "Edit"
             onClicked: function() {
-              editStudentWindow.user = {id: id, "firstname": firstname, "lastname": lastname, "email": email}
+              editStudentWindow.user = {id: id, "firstname": firstname, "lastname": lastname, "email": email, "grade": grade}
               editStudentWindow.visible = true
             }
           }

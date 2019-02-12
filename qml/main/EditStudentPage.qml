@@ -81,6 +81,21 @@ Item {
         }
 
         Label {
+          id: gradeLabel
+          text: "Grade" 
+        }
+        ValidatableField {
+          text: user ? user.grade : ""
+          id: gradeField
+          Layout.fillWidth: true
+          function validate() {
+            var valid = text !== ""
+            lastNameLabel.Material.foreground = ((valid) ? Material.Black : Material.Red)
+            return valid
+          }
+        }
+
+        Label {
           id: emailLabel
           text: "Email " 
         }
@@ -118,7 +133,8 @@ Item {
           var validations = [
             emailField.validate(),
             firstNameField.validate(),
-            lastNameField.validate()
+            lastNameField.validate(),
+            gradeField.validate()
           ]
           // If all of them are valid, we can proceed by...
           var valid = validations.every(function(x) { return x })
@@ -129,7 +145,8 @@ Item {
               user.id,
               firstNameField.text,
               lastNameField.text,
-              emailField.text
+              emailField.text,
+              gradeField.text
             )
             EditStudentViewModel.start_fetch()
             // Moves the swipe to the next page

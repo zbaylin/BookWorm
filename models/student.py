@@ -8,6 +8,7 @@ class Student():
     firstname,
     lastname,
     email,
+    grade,
     ID=None,
     password=None,
     num_issuances=0,
@@ -15,6 +16,7 @@ class Student():
     self.firstname = firstname
     self.lastname = lastname
     self.email = email
+    self.grade = grade
     self.id = ID
     self.password = password
     self.num_issuances = num_issuances
@@ -28,6 +30,7 @@ class Student():
       json_map["firstname"],
       json_map["lastname"],
       json_map["email"],
+      json_map["grade"],
       util.dict.safe_get(json_map, "id"),
       util.dict.safe_get(json_map, "password"),
       len(issuances) if issuances else 0

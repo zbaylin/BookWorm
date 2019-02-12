@@ -11,13 +11,14 @@ class EditStudentViewModel(WebContentViewModel):
     super().__init__(config.hostname + "/api/student/edit")
     self.params = None
 
-  @QtCore.Slot(int, str, str, str)
-  def init_for_student(self, ID, firstname, lastname, email):
+  @QtCore.Slot(int, str, str, str, str)
+  def init_for_student(self, ID, firstname, lastname, email, grade):
     self.params = {
       "id": ID,
       "email": email,
       "firstname": firstname,
-      "lastname": lastname
+      "lastname": lastname,
+      "grade": grade
     }
   
   @QtCore.Slot()
