@@ -184,6 +184,10 @@ ApplicationWindow {
           viewID: studentList
         },
         {
+          name: "Issuances List",
+          viewID: issuancesList
+        },
+        {
           name: "Create Student (Sign Up)",
           viewID: createStudent
         },
@@ -242,5 +246,6 @@ ApplicationWindow {
     Component { id: studentList; StudentList {} }
     Component { id: reportPage; ReportPage {} }
     Component { id: backupPage; BackupPage {} }
+    Component { id: issuancesList; IssuanceList {} }
   }
 }

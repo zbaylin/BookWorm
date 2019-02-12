@@ -8,6 +8,8 @@ from views.models.list_students import StudentsListModel
 from views.models.view_students import StudentsViewModel
 from views.models.view_edit_student import EditStudentViewModel
 from views.models.view_issuance_report import IssuanceReportViewModel
+from views.models.view_issuances import IssuancesViewModel
+from views.models.list_issuances import IssuancesListModel
 
 
 def prep_engine(engine: QtQml.QQmlApplicationEngine):
@@ -22,6 +24,8 @@ def prep_engine(engine: QtQml.QQmlApplicationEngine):
   engine.students_list_model = StudentsListModel()
   engine.edit_student_view_model = EditStudentViewModel()
   engine.issuance_report_view_model = IssuanceReportViewModel()
+  engine.issuances_list_model = IssuancesListModel()
+  engine.issuances_view_model = IssuancesViewModel()
   # We acquire the root context from the engine...
   context = engine.rootContext()
   # ...and load in all of the models so they are accessible from QML
@@ -34,5 +38,7 @@ def prep_engine(engine: QtQml.QQmlApplicationEngine):
   context.setContextProperty('StudentsListModel', engine.students_list_model)
   context.setContextProperty('EditStudentViewModel', engine.edit_student_view_model)
   context.setContextProperty('IssuanceReportViewModel', engine.issuance_report_view_model)
+  context.setContextProperty('IssuancesListModel', engine.issuances_list_model)
+  context.setContextProperty('IssuancesViewModel', engine.issuances_view_model)
   # We load the main QML file from the disk into the engine
   engine.load("qml/main/main.qml")
