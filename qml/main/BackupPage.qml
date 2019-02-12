@@ -10,7 +10,6 @@ import "../convenience"
 import "../convenience/NetworkState.js" as NetworkState
 
 Item {
-  anchors.fill: parent
   Column {
     anchors.centerIn: parent
     Text {

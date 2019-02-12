@@ -14,6 +14,5 @@ def _register_client():
 
 
 def register_client():
-  print("ABC")
   thread = threading.Thread(target=_register_client)
   thread.start()

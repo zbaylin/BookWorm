@@ -12,11 +12,11 @@ class Book():
     publication_date,
     rating
   ):
-    self.isbn = isbn,
-    self.title = title,
-    self.author = author,
-    self.publisher = publisher,
-    self.summary = summary,
+    self.isbn = isbn
+    self.title = title
+    self.author = author
+    self.publisher = publisher
+    self.summary = summary
     self.publication_date = publication_date
     self.rating = rating
   
