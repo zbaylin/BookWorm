@@ -190,6 +190,10 @@ ApplicationWindow {
         {
           name: "Generate Weekly Report",
           viewID: reportPage
+        },
+        {
+          name: "Backup Data",
+          viewID: backupPage
         }
       ]
       /*
@@ -237,5 +241,6 @@ ApplicationWindow {
     Component { id: createStudent; CreateStudentPage {} }
     Component { id: studentList; StudentList {} }
     Component { id: reportPage; ReportPage {} }
+    Component { id: backupPage; BackupPage {} }
   }
 }
