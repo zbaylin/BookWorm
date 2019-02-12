@@ -11,7 +11,6 @@ import "../convenience/MaterialDesign.js" as MD
 WebContent {
   Component.onCompleted: function() {
     IssuancesViewModel.start_fetch()
-    console.log("NANANA")
   }
 
   ListView {

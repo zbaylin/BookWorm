@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtQml
+from PySide2 import QtWidgets, QtQml, QtGui
 import sys
 import os
 from interfaces.wizard import WizardInterface
@@ -12,6 +12,9 @@ app = None
 if __name__ == "__main__":
   # Create a Qt Application object from the system arguments
   app = QtWidgets.QApplication(sys.argv)
+
+  # Set the application icon
+  app.setWindowIcon(QtGui.QIcon("assets/img/icon.png"))
 
   # Enable material design in the app
   os.environ["QT_QUICK_CONTROLS_STYLE"] = "Material"
