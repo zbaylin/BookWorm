@@ -5,6 +5,7 @@ from interfaces.wizard import WizardInterface
 import views.main
 import signal
 import config
+from util import network
 
 proc = None
 app = None
@@ -57,6 +58,9 @@ if __name__ == "__main__":
     root.show()
     # And execute the application
     proc = app.exec_()
+
+  # Register this client to the main server
+  network.register_client()  
       
   # A function to start the wizard
   # Again, it is conditionally executed.
