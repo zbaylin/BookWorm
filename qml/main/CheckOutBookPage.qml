@@ -15,6 +15,9 @@ Item {
     emailField.text = ""
     passwordField.text = ""
     isbn = ""
+    successColumn.visible = false
+    successPage.errorMessage.visible = false
+    successPage.loadingIndicator.visible = false
   }
 
   SwipeView {

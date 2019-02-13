@@ -14,6 +14,9 @@ Item {
   function reset() {
     user = null
     swipe.currentIndex = 0
+    successColumn.visible = false
+    resultPage.errorMessage.visible = false
+    resultPage.loadingIndicator.visible = false
   }
 
   SwipeView {
