@@ -12,7 +12,7 @@ from views.models.view_issuances import IssuancesViewModel
 from views.models.list_issuances import IssuancesListModel
 
 
-def prep_engine(engine: QtQml.QQmlApplicationEngine):
+def prep_engine(engine: QtQml.QQmlApplicationEngine, qml_path: str):
   # We create all the list/view models needed for the main application
   # All of them can be found at their umport locations above
   engine.book_list_model = BooksListModel()
@@ -41,4 +41,4 @@ def prep_engine(engine: QtQml.QQmlApplicationEngine):
   context.setContextProperty('IssuancesListModel', engine.issuances_list_model)
   context.setContextProperty('IssuancesViewModel', engine.issuances_view_model)
   # We load the main QML file from the disk into the engine
-  engine.load("qml/main/main.qml")
+  engine.load(qml_path + "/main/main.qml")

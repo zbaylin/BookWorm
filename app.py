@@ -7,10 +7,14 @@ import signal
 import config
 from util import network
 
-proc = None
-app = None
 
-if __name__ == "__main__":
+def run():
+  # Sets path of QML files
+  qml_path = ""
+  if os.path.isdir(sys.path[0] + "/qml"):
+    qml_path = sys.path[0] + "/qml"
+  else:
+    qml_path = sys.path[0] + "/../qml"
   # Create a Qt Application object from the system arguments
   app = QtWidgets.QApplication(sys.argv)
 
@@ -31,11 +35,10 @@ if __name__ == "__main__":
   # has been started before.
   def start_main():
     # Access the global proc and app vars
-    global proc, app
     # Load in the config
     config.load()
     # Prep the engine (see views.main)
-    views.main.prep_engine(engine)
+    views.main.prep_engine(engine, qml_path)
     # Get the list of root objects:
     n = engine.rootObjects()
     # If there are more than one objects in the list, use the second one.
@@ -76,7 +79,7 @@ if __name__ == "__main__":
 
     # Load in the interface so it is accessible from QML
     context = engine.rootContext()
-    engine.load("qml/wizard/wizard.qml")
+    engine.load(qml_path + "/wizard/wizard.qml")
     interface = WizardInterface(lambda: start_main_from_wizard(root))
     root = engine.rootObjects()[0]
     context.setContextProperty("wizardInterface", interface)
@@ -92,4 +95,8 @@ if __name__ == "__main__":
     start_wizard()
 
   # Exit python when the app starts
-  sys.exit(proc)
+  sys.exit()
+
+
+if __name__ == "__main__":
+  run()
